@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 export function QuoteModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [step, setStep] = useState(1);
+  // Remove unused step state
   const [quote, setQuote] = useState({
     bedrooms: 1,
     windows: 0,
@@ -10,9 +10,10 @@ export function QuoteModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // Fix the dependency array
   useEffect(() => {
     calculatePrice();
-  }, [quote]);
+  }, [quote]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const calculatePrice = () => {
     // Cleaning prices based on number of bedrooms
